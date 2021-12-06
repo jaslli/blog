@@ -1,5 +1,6 @@
 package com.yww.blog.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,6 +17,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -64,7 +66,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public List<UserDTO> getUserList() {
-        return baseMapper.getUserList();
+        // 获取角色ID
+        List<User> userList = baseMapper.selectList(null);
+        List<UserDTO> list = userList.stream().map(user -> {
+            UserDTO userDTO = new UserDTO();
+            BeanUtil.copyProperties(user, userDTO);
+            userDTO.setRolename(roleService.getRoleNameByUserId(user.getId()));
+            return userDTO;
+        }).collect(Collectors.toList());
+        list.forEach(System.out::println);
+        return list;
     }
 
 }

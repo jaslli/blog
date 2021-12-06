@@ -3,7 +3,12 @@
 <mapper namespace="com.yww.blog.mapper.UserRoleMapper">
 
     <select id="getRoleId" resultType="java.lang.String" parameterType="java.lang.String">
-        SELECT role_id FROM sys_user_role WHERE user_id = #{userId}  LIMIT 1
+        SELECT role_id FROM sys_user_role WHERE user_id = #{userId} LIMIT 1
+    </select>
+    <select id="getRoleName" resultType="java.lang.String" parameterType="java.lang.String">
+        SELECT name
+        FROM sys_user_role sur LEFT JOIN sys_role sr on sur.role_id = sr.id
+        WHERE user_id = #{userId} LIMIT 1
     </select>
 
 </mapper>

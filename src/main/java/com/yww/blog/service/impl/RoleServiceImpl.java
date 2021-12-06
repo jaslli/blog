@@ -36,4 +36,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         return userRoleMapper.getRoleId(userId);
     }
 
+    @Override
+    public String getRoleNameByUserId(String userId) {
+        return userRoleMapper.getRoleName(userId);
+    }
+
 }

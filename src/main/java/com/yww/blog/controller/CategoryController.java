@@ -31,7 +31,7 @@ public class CategoryController {
     }
 
     @ApiOperation("查询所有分类数据，包括每个分类的文章数")
-    @GetMapping("slelctAll")
+    @GetMapping("selelctAll")
     public Result selectAll() {
         return Result.success(service.selectAll());
     }

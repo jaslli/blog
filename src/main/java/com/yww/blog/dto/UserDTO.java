@@ -18,14 +18,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserDTO {
 
+    /**
+     * 数据ID
+     */
     private String id;
 
+    /**
+     * 用户名
+     */
     private String username;
 
+    /**
+     * 用户昵称
+     */
+    private String nickname;
+
+    /**
+     * 用户头像
+     */
     private String avatar;
 
-    private String locked;
+    /**
+     * 用户是否被开启
+     */
+    private String enable;
 
-    private String name;
+    /**
+     * 用户角色名称
+     */
+    private String rolename;
 
 }

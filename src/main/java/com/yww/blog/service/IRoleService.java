@@ -27,4 +27,11 @@ public interface IRoleService extends IService<Role> {
      */
     String getRoleIdByUserId(String userId);
 
+    /**
+     * 根据用户ID查询角色名称
+     * @param userId    用户ID
+     * @return          角色名称
+     */
+    String getRoleNameByUserId(String userId);
+
 }

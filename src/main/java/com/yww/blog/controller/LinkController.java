@@ -30,7 +30,7 @@ public class LinkController {
         this.service = service;
     }
 
-    @ApiOperation("查询所有友链数据")
+    @ApiOperation("查询所有友链数据(前台)")
     @GetMapping("listAll")
     public Result listAll() {
         return Result.success(service.listAll());

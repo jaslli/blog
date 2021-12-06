@@ -62,6 +62,9 @@ public class MenuVO {
      */
     private Boolean hidden;
 
+    /**
+     * 分组的子集友链
+     */
     private List<MenuVO> children;
 
 }
