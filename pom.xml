@@ -59,7 +59,6 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatis-plus-generator.version}</version>
         </dependency>
-
         <!--   代码生成器的引擎 velocity  -->
         <dependency>
             <groupId>org.apache.velocity</groupId>

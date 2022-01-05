@@ -12,4 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2021-11-26
  */
 public interface IArticleContentService extends IService<ArticleContent> {
+
 }

@@ -2,6 +2,7 @@ package com.yww.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yww.blog.entity.Menu;
+import com.yww.blog.util.Result;
 import com.yww.blog.vo.MenuVO;
 
 import java.util.List;
@@ -35,6 +36,13 @@ public interface IMenuService extends IService<Menu> {
      * @param menuVO 菜单显示类
      * @return  true Or false
      */
-    Boolean saveOrUpdate(MenuVO menuVO);
+    Result saveOrUpdate(MenuVO menuVO);
+
+    /**
+     * 根据菜单ID删除某个菜单
+     * @param id    菜单ID
+     * @return      true Or false
+     */
+    Result deleteMenu(String id);
 
 }

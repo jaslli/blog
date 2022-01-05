@@ -41,7 +41,13 @@ public class MenuController {
     @ApiImplicitParam(name = "menuVO", value = "菜单实体数据",required = true)
     @PostMapping("save")
     public Result saveArticleContent(@RequestBody MenuVO menuVO) {
-        return Result.success(service.saveOrUpdate(menuVO));
+        return service.saveOrUpdate(menuVO);
+    }
+
+    @ApiOperation("根据ID删除菜单")
+    @DeleteMapping("delete/{id}")
+    public Result saveArticleContent(@PathVariable("id")String id) {
+        return service.deleteMenu(id);
     }
 
 }

@@ -2,6 +2,7 @@ package com.yww.blog.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yww.blog.entity.Article;
+import com.yww.blog.util.Result;
 import com.yww.blog.vo.ArticlePageVO;
 import com.yww.blog.vo.ArticleVO;
 
@@ -46,4 +47,10 @@ public interface IArticleService extends IService<Article> {
      */
     Integer getCount(String categoryId);
 
+    /**
+     * 根据ID删除文章和对应得文章内容
+     * @param id    文章ID
+     * @return      删除结果
+     */
+    Result delete(String id);
 }

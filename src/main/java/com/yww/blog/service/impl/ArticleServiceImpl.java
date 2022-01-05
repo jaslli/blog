@@ -6,9 +6,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yww.blog.entity.Article;
+import com.yww.blog.entity.ArticleContent;
 import com.yww.blog.mapper.ArticleMapper;
+import com.yww.blog.service.IArticleContentService;
 import com.yww.blog.service.IArticleService;
 import com.yww.blog.service.ICategoryService;
+import com.yww.blog.util.Result;
 import com.yww.blog.vo.ArticlePageVO;
 import com.yww.blog.vo.ArticleVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     ICategoryService categoryService;
+    @Autowired
+    IArticleContentService articleContentService;
 
     /**
      * TODO 是否用优化？
@@ -85,6 +90,19 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         QueryWrapper<Article> wrapper = new QueryWrapper<>();
         wrapper.eq("category_id",categoryId);
         return baseMapper.selectList(wrapper).size();
+    }
+
+    @Override
+    public Result delete(String id) {
+        Article article = baseMapper.selectById(id);
+        if (article == null) {
+            return Result.failure("不存在该文章");
+        }
+        // 删除文章内容
+        articleContentService.remove(new QueryWrapper<ArticleContent>().eq("article_id", article.getId()));
+        // 删除文章
+        baseMapper.deleteById(id);
+        return Result.success("删除成功");
     }
 
 }

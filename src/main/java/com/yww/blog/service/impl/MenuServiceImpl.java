@@ -2,12 +2,14 @@ package com.yww.blog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yww.blog.entity.Menu;
 import com.yww.blog.mapper.MenuMapper;
 import com.yww.blog.mapper.RoleMenuMapper;
 import com.yww.blog.service.IMenuService;
 import com.yww.blog.service.IRoleService;
+import com.yww.blog.util.Result;
 import com.yww.blog.vo.MenuVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,7 +80,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     }
 
     @Override
-    public Boolean saveOrUpdate(MenuVO menuVO) {
+    public Result saveOrUpdate(MenuVO menuVO) {
         Menu menu = new Menu();
         BeanUtil.copyProperties(menuVO,menu);
         if (StrUtil.isBlankOrUndefined(menu.getId())) {
@@ -86,7 +88,22 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         } else {
             baseMapper.updateById(menu);
         }
-        return true;
+        return Result.success("删除成功！");
+    }
+
+    @Override
+    public Result deleteMenu(String id) {
+        Menu menu = baseMapper.selectById(id);
+        if (menu == null) {
+            return Result.failure("没有该菜单!");
+        }
+        List<Menu> list = baseMapper.selectList(new QueryWrapper<Menu>().eq("parentId", id));
+        if (list.isEmpty()) {
+            baseMapper.deleteById(id);
+            return Result.success();
+        } else {
+            return Result.failure("该菜单拥有子菜单，需要先删除子菜单才能删除该菜单!");
+        }
     }
 
 }

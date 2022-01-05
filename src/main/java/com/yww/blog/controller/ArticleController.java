@@ -69,5 +69,12 @@ public class ArticleController {
         return Result.success(service.save(article));
     }
 
+    @ApiOperation("删除文章")
+    @ApiImplicitParam(name = "id", value = "文章数据ID",required = true)
+    @DeleteMapping("delete/{id}")
+    public Result delete(@PathVariable("id")String id) {
+        return service.delete(id);
+    }
+
 }
 

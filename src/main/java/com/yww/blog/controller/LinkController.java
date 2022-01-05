@@ -43,5 +43,12 @@ public class LinkController {
         return Result.success(service.save(link));
     }
 
+    @ApiOperation("添加友链数据")
+    @ApiImplicitParam(name = "id", value = "友链ID",required = true)
+    @DeleteMapping("delete/{id}")
+    public Result delete(@PathVariable("id")String id) {
+        return Result.success(service.removeById(id));
+    }
+
 }
 
